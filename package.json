@@ -1,0 +1,64 @@
+{
+    "name": "concurrentlyer",
+    "version": "0.0.1",
+    "description": "Run commands concurrently, no dependencies",
+    "keywords": [
+        "bash",
+        "concurrent",
+        "parallel",
+        "concurrently",
+        "command",
+        "sh",
+        "dependless"
+    ],
+    "license": "GPL-3.0-only",
+    "author": {
+        "name": "Alexandre Szymocha",
+        "url": "https://github.com/Aksamyt"
+    },
+    "files": [
+        "index.cjs",
+        "index.d.ts"
+    ],
+    "main": "index.cjs",
+    "types": "index.d.ts",
+    "bin": {
+        "concurrentlyer": "index.cjs"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Palea/concurrentlyer.git"
+    },
+    "scripts": {
+        "dev": "esbuild --bundle --platform=node --target=node12 --format=cjs index.ts | node -",
+        "typecheck": "tsc --noEmit",
+        "lint": "prettier --check .",
+        "build": "esbuild --bundle --platform=node --target=node12 --format=cjs --minify --outfile=index.cjs --banner:js='#!/usr/bin/env node' index.ts",
+        "prepack": "mv COPYING .COPYING",
+        "prepare": "npm run typecheck && npm run lint && npm run build",
+        "postpack": "mv .COPYING COPYING",
+        "test": "mocha",
+        "testcase:yes": "echo yes",
+        "testcase:no": "echo no",
+        "testcasee:fail": "echo fail"
+    },
+    "devDependencies": {
+        "@types/mocha": "9.1.0",
+        "@types/node": "12.12.6",
+        "esbuild": "0.14.14",
+        "esbuild-runner": "2.2.1",
+        "mocha": "9.2.0",
+        "prettier": "2.5.1",
+        "typescript": "*"
+    },
+    "engines": {
+        "node": ">=12.0.0"
+    },
+    "mocha": {
+        "extension": [
+            "ts"
+        ],
+        "spec": "src/**/*.test.ts",
+        "require": "esbuild-runner/register"
+    }
+}
